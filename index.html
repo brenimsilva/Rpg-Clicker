@@ -11,6 +11,7 @@
   <body>
     <header>
       <div class="top-links"></div>
+      <img src="Images/Terrain/Jungle01.png" alt="background" id="bg-monster" />
       <div class="top-left"></div>
       <div class="top-right" class="monster-status">
         <img src="Images/Rex-Cat-flip.png" alt="monster" class="monster" />
@@ -26,16 +27,18 @@
       </div>
     </header>
     <div class="bottom">
+      <img src="Images/Terrain/Jungle01.png" alt="background" id="bg-hero" />
       <div class="bottom-left">
         <img src="Images/hero.png" alt="hero" id="hero" />
         <!--------------Player Stats-------------->
 
         <div class="progress__player">
-          <div class="progress__fill"></div>
-          <span class="progress__text">120</span>
+          <div class="progress__fill__player"></div>
+          <span class="progress__text__player">120</span>
         </div>
         <div class="hero-information">
           <table class="hero-stats" cellspacing="4">
+            <div id="glass"></div>
             <thead>
               <tr>
                 <th>Stats</th>
@@ -44,7 +47,13 @@
             </thead>
             <tbody>
               <tr>
-                <td class="stat-name">STR <span id="STR">0</span></td>
+                <td class="stat-name">
+                  STR <span id="STR">0</span>
+                  <img
+                    src="Images/arrow-right-pixel-white.png"
+                    class="arrow arrow-str"
+                  />
+                </td>
                 <td class="stat-name">HP <span id="HP">0</span></td>
                 <td class="stat-name">ACC <span id="ACC">0</span></td>
               </tr>
@@ -78,11 +87,13 @@
           <div class="content">
             <div class="close-btn">&times;</div> -->
         <table class="icons">
-          <tr>
-            <td><img src="Images/Sword.png" alt="sword" id="sword" /></td>
+          <tr class="tr-icons">
+            <td id="td-sword">
+              <img src="Images/Sword-neon.png" alt="sword" id="sword" />
+            </td>
             <td class="info">Attack</td>
           </tr>
-          <tr>
+          <tr class="tr-icons">
             <td>
               <img src="Images/Potion.png" alt="HP-Potion" id="HP-Potion" />
             </td>
@@ -91,7 +102,7 @@
               <span class="qtd"> 1</span>
             </td>
           </tr>
-          <tr>
+          <tr class="tr-icons">
             <td>
               <img src="Images/SP-Potion.png" alt="SP-Potion" id="SP-Potion" />
             </td>
@@ -100,7 +111,7 @@
               <span class="qtd"> 3</span>
             </td>
           </tr>
-          <tr>
+          <tr class="tr-icons">
             <td><img src="Images/Coins.png" alt="coins" id="coins" /></td>
             <td>Coins <span class="qtd"> 999999</span></td>
           </tr>

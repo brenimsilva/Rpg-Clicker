@@ -1,32 +1,107 @@
 "use strict";
 
-// Objects definition
+// -------------------------Define Objects------------------------- //
 function heroes(
   nameHero,
   classHero,
+  maxHP,
   HP,
   SP,
   STR,
   DEX,
+  AGI,
   VIT,
   INT,
-  atributePoints
+  atributePoints,
+  EXP,
+  LVL
 ) {
   this.nameHero = nameHero;
   this.classHero = classHero;
+  this.maxHP = maxHP;
   this.HP = HP;
   this.SP = SP;
   this.STR = STR;
   this.DEX = DEX;
+  this.AGI = AGI;
   this.VIT = VIT;
   this.INT = INT;
   this.atributePoints = atributePoints;
+  this.EXP = EXP;
+  this.LVL = LVL;
+  this.ATK = 0;
+  this.MAG = 0;
+  this.DEF = 0;
+  this.ACC = 0;
+  this.SPD = 0;
+  this.minAtk = 0;
+  this.maxAtk = 0;
 }
-const hpWarrior = 50;
-const hpSorcerer = 35;
-const warrior = new heroes("Breno", "Warrior", hpWarrior, 0, 3, 2, 2, 1, 0);
+//Set Warrio Class Values
+const warriorStats = ["Heroe", "Warrior", 50, 50, 0, 3, 2, 1, 2, 1, 0, 0, 1];
+const warrior = new heroes();
+let index = 0;
+for (let element in warrior) {
+  warrior[element] = warriorStats[index];
+  index++;
+}
+console.log(warrior);
 
-// Mobs
+// -------------------------Atribute------------------------- //
+
+function selectAtribute(atribute) {
+  return document.getElementById(atribute);
+}
+
+function defineAtributes(heroe) {
+  const minAtk = Math.round(heroe.STR * 0.3);
+  const maxAtk = Math.round(heroe.STR * 1.1);
+  heroe.minAtk = minAtk;
+  heroe.maxAtk = maxAtk;
+  heroe.maxHP = Math.round(heroe.STR * 1.2) + heroe.VIT * 5 + 50;
+  heroe.ACC = heroe.DEX * 5;
+  heroe.DEF = heroe.DEX * 2 + heroe.VIT * 2;
+  heroe.MAG = heroe.INT * 4;
+  heroe.SPD = heroe.AGI * 3;
+  heroe.SP = heroe.INT * 5;
+}
+
+//Stats Initialization
+document.getElementById("STR").textContent = warrior.STR;
+document.getElementById("DEX").textContent = warrior.DEX;
+document.getElementById("AGI").textContent = warrior.AGI;
+document.getElementById("VIT").textContent = warrior.VIT;
+document.getElementById("INT").textContent = warrior.INT;
+defineAtributes(warrior);
+
+//Atribute initialization
+document.getElementById("HP").textContent = warrior.HP;
+document.getElementById("HP").textContent = warrior.maxHP;
+document.getElementById("SP").textContent = warrior.SP;
+document.getElementById(
+  "ATK"
+).textContent = `${warrior.minAtk} - ${warrior.maxAtk}`;
+document.getElementById("MAG").textContent = warrior.MAG;
+document.getElementById("DEF").textContent = warrior.DEF;
+document.getElementById("ACC").textContent = warrior.ACC;
+document.getElementById("SPD").textContent = warrior.SPD;
+
+//Buton STR
+document.querySelector(".arrow-str").addEventListener("click", function () {
+  warrior.STR++;
+  defineAtributes(warrior);
+  document.getElementById("STR").textContent = warrior.STR;
+  document.getElementById(
+    "ATK"
+  ).textContent = `${warrior.minAtk} - ${warrior.maxAtk}`;
+  document.getElementById("HP").textContent = warrior.maxHP;
+  percentPlayer = definePercentages(warrior.maxHP, warrior.HP);
+  updateProgressBarPlayer(playerBar, warrior.HP, warrior.maxHP, percentPlayer);
+});
+
+// -------------------------LVL Sistem------------------------- //
+
+// -------------------------Mobs------------------------- //
 function Monster(maxHP, HP = maxHP) {
   this.maxHP = maxHP;
   this.HP = HP;
@@ -34,9 +109,9 @@ function Monster(maxHP, HP = maxHP) {
 let Javali = new Monster(200);
 console.log(Javali.HP);
 
-////////////// Health Bar/////////////////
+// -------------------------Health Bar------------------------- //
 const pBar01 = document.querySelector(".progress__mob");
-
+const playerBar = document.querySelector(".progress__player");
 //Definir dano recebido
 function damageDealt(atk, minAtk) {
   return Math.trunc(Math.random() * atk) + minAtk;
@@ -52,22 +127,28 @@ function updateProgressBar(pbar, hp, percentage) {
   pbar.querySelector(".progress__fill").style.width = percentage;
   pbar.querySelector(".progress__text").textContent = hp;
 }
+function updateProgressBarPlayer(pbar, hp, maxHp, percentage) {
+  pbar.querySelector(".progress__fill__player").style.width = percentage;
+  pbar.querySelector(".progress__text__player").textContent = `${hp}/${maxHp}`;
+}
 
-let percent = definePercentages(Javali.maxHP, Javali.HP);
-updateProgressBar(pBar01, Javali.HP, percent);
+//PERCENT MOB
+let percentMob = definePercentages(Javali.maxHP, Javali.HP);
+console.log(percentMob);
+updateProgressBar(pBar01, Javali.HP, percentMob);
+
+//PERCENT PLAYER
+let percentPlayer = definePercentages(warrior.maxHP, warrior.HP);
+console.log(percentPlayer);
+updateProgressBarPlayer(playerBar, warrior.HP, warrior.maxHP, percentPlayer);
+
+//ATACAR MOB
 document.querySelector("#sword").addEventListener("click", function () {
   //
-  Javali.HP = Javali.HP - damageDealt(20, 5);
+  Javali.HP = Javali.HP - damageDealt(warrior.maxAtk, warrior.minAtk);
   console.log(Javali.HP);
   //
-  let percent = definePercentages(Javali.maxHP, Javali.HP);
-  console.log(percent);
+  percentMob = definePercentages(Javali.maxHP, Javali.HP);
   //
-  updateProgressBar(pBar01, Javali.HP, percent);
+  updateProgressBar(pBar01, Javali.HP, percentMob);
 });
-
-//////////////popup
-
-function togglePopup() {
-  document.getElementById("popup-1").classList.toggle("active");
-}
