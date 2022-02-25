@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style/style.css" />
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <div class="top-links"></div>
+      <div class="top-left"></div>
+      <div class="top-right" class="monster-status">
+        <img src="/Images/Rex-Cat-flip.png" alt="monster" class="monster" />
+        <!---
+        <div class="progress-bar">
+          <div class="progress-bar-value">65%</div>
+          <div class="progress-bar-fill"></div>
+        </div>-->
+        <div class="progress__mob">
+          <div class="progress__fill"></div>
+          <span class="progress__text">25</span>
+        </div>
+      </div>
+    </header>
+    <div class="bottom">
+      <div class="bottom-left">
+        <img src="/Images/hero.png" alt="hero" id="hero" />
+        <!--------------Player Stats-------------->
+
+        <div class="progress__player">
+          <div class="progress__fill"></div>
+          <span class="progress__text">120</span>
+        </div>
+        <div class="hero-information">
+          <table class="hero-stats" cellspacing="4">
+            <thead>
+              <tr>
+                <th>Stats</th>
+                <th>Atb.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="stat-name">STR <span id="STR">0</span></td>
+                <td class="stat-name">HP <span id="HP">0</span></td>
+                <td class="stat-name">ACC <span id="ACC">0</span></td>
+              </tr>
+              <tr>
+                <td class="stat-name">DEX <span id="DEX">0</span></td>
+                <td class="stat-name">SP <span id="SP">0</span></td>
+                <td class="stat-name">SPD <span id="SPD">0</span></td>
+              </tr>
+              <tr>
+                <td class="stat-name">AGI <span id="AGI">0</span></td>
+                <td class="stat-name">ATK <span id="ATK">0</span></td>
+              </tr>
+              <tr>
+                <td class="stat-name">VIT <span id="VIT">0</span></td>
+                <td class="stat-name">MAG <span id="MAG">0</span></td>
+              </tr>
+              <tr>
+                <td class="stat-name">INT <span id="INT">0</span></td>
+                <td class="stat-name">DEF <span id="DEF">0</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="bottom-middle">
+        <!---------------- POPUP Actions ---------------->
+
+        <!-- <button onclick="togglePopup()">Actions</button>
+        <div class="popup" id="popup-1">
+          <div class="overlay"></div>
+          <div class="content">
+            <div class="close-btn">&times;</div> -->
+        <table class="icons">
+          <tr>
+            <td><img src="/Images/Sword.png" alt="sword" id="sword" /></td>
+            <td class="info">Attack</td>
+          </tr>
+          <tr>
+            <td>
+              <img src="/Images/Potion.png" alt="HP-Potion" id="HP-Potion" />
+            </td>
+            <td>
+              HP Potion
+              <span class="qtd"> 1</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="/Images/SP-Potion.png" alt="SP-Potion" id="SP-Potion" />
+            </td>
+            <td>
+              SP Potion
+              <span class="qtd"> 3</span>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="/Images/Coins.png" alt="coins" id="coins" /></td>
+            <td>Coins <span class="qtd"> 999999</span></td>
+          </tr>
+        </table>
+        <!-- </div>
+                </div> -->
+      </div>
+      <div class="bottom-right"></div>
+    </div>
+    <footer><p class="footer-info">Made by: @brenimsilva</p></footer>
+    <script src="/script/script.js"></script>
+  </body>
+</html>
