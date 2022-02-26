@@ -118,7 +118,7 @@ footer {
 
 .hero-stats {
   width: 400px;
-  margin: 30px auto auto auto;
+  margin: auto;
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.1),
