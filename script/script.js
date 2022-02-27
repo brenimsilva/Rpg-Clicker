@@ -1,4 +1,20 @@
 "use strict";
+// Define Variables
+const pBar01 = document.querySelector(".progress__mob");
+const playerBar = document.querySelector(".progress__player");
+const monsterSprite = document.querySelector(".monster");
+const iconsSession = document.querySelector(".icons");
+const swordAttack = document.getElementById("sword");
+
+// Points in Stats
+const arrowGeneral = document.querySelector(".arrow");
+const arrowSTR = document.querySelector(".arrow-str");
+const arrowDEX = document.querySelector(".arrow-dex");
+const arrowAGI = document.querySelector(".arrow-agi");
+const arrowVIT = document.querySelector(".arrow-vit");
+const arrowINT = document.querySelector(".arrow-int");
+
+//
 
 // -------------------------Define Objects------------------------- //
 function heroes(
@@ -39,27 +55,51 @@ function heroes(
   this.minAtk = 0;
   this.maxAtk = 0;
 }
-//Set Warrio Class Values
+//Set Warrior Class Values
 const warriorStats = ["Heroe", "Warrior", 50, 50, 0, 0, 3, 2, 1, 2, 1, 0, 0, 1];
+
+//Creating a warrior
 const warrior = new heroes();
+
+//Attributing values to warrior Obj
 let index = 0;
 for (let element in warrior) {
   warrior[element] = warriorStats[index];
   index++;
 }
-console.log(warrior);
 
 // -------------------------Atribute------------------------- //
 
-function selectAtribute(atribute) {
-  return document.getElementById(atribute);
+// function selectAtribute(atribute) {
+//   return document.getElementById(atribute);
+// }
+
+// Showing hero Stats in HTML (.hero-stats class)
+function writeStats() {
+  //Stats Initialization
+  document.getElementById("STR").textContent = warrior.STR;
+  document.getElementById("DEX").textContent = warrior.DEX;
+  document.getElementById("AGI").textContent = warrior.AGI;
+  document.getElementById("VIT").textContent = warrior.VIT;
+  document.getElementById("INT").textContent = warrior.INT;
+  defineAtributes(warrior);
+
+  //Atribute initialization
+  document.getElementById("HP").textContent = `${warrior.HP}/${warrior.maxHP}`;
+  document.getElementById("SP").textContent = `${warrior.SP}/${warrior.maxSP}`;
+  document.getElementById(
+    "ATK"
+  ).textContent = `${warrior.minAtk} - ${warrior.maxAtk}`;
+  document.getElementById("MAG").textContent = warrior.MAG;
+  document.getElementById("DEF").textContent = warrior.DEF;
+  document.getElementById("ACC").textContent = warrior.ACC;
+  document.getElementById("SPD").textContent = warrior.SPD;
 }
 
+//Do the math for Attributes based on Hero Stats Points.
 function defineAtributes(heroe) {
-  const minAtk = Math.round(heroe.STR * 0.3);
-  const maxAtk = Math.round(heroe.STR * 1.1);
-  heroe.minAtk = minAtk;
-  heroe.maxAtk = maxAtk;
+  heroe.minAtk = Math.round(heroe.STR * 0.3);
+  heroe.maxAtk = Math.round(heroe.STR * 1.1);
   heroe.maxHP = Math.round(heroe.STR * 1.2) + heroe.VIT * 5 + warriorStats[2];
   heroe.ACC = heroe.DEX * 5;
   heroe.DEF = heroe.DEX * 2 + heroe.VIT * 2;
@@ -68,77 +108,67 @@ function defineAtributes(heroe) {
   heroe.maxSP = heroe.INT * 5;
 }
 
-//Stats Initialization
-document.getElementById("STR").textContent = warrior.STR;
-document.getElementById("DEX").textContent = warrior.DEX;
-document.getElementById("AGI").textContent = warrior.AGI;
-document.getElementById("VIT").textContent = warrior.VIT;
-document.getElementById("INT").textContent = warrior.INT;
-defineAtributes(warrior);
-
-//Atribute initialization
+//Initializing Stats
+writeStats(); // CORRIGIR
 warrior.HP = warrior.maxHP;
 warrior.SP = warrior.maxSP;
-document.getElementById("HP").textContent = `${warrior.HP}/${warrior.maxHP}`;
-document.getElementById("SP").textContent = `${warrior.SP}/${warrior.maxSP}`;
-document.getElementById(
-  "ATK"
-).textContent = `${warrior.minAtk} - ${warrior.maxAtk}`;
-document.getElementById("MAG").textContent = warrior.MAG;
-document.getElementById("DEF").textContent = warrior.DEF;
-document.getElementById("ACC").textContent = warrior.ACC;
-document.getElementById("SPD").textContent = warrior.SPD;
+writeStats();
 
 // -------------------------Upgrade Stats------------------------- //
 
+// const clickArrow = () => {
+//   defineAtributes(warrior);
+//   writeStats();
+//     if(document.querySelector('.arrow').classList.contains('.arrow-str') || document.querySelector('.arrow').classList.contains('.arrow-vit')) {
+//       updateProgressBarPlayer(playerBar, warrior.HP, warrior.maxHP, definePercentages(warrior.maxHP, warrior.HP))
+//     }
+// }
+
+//Button all
+
+// document.querySelector('.arrow').addEventListener('click', function(){
+//   switch(true) {
+//     case ()
+//   }
+// })
+
 //Buton STR
-document.querySelector(".arrow-str").addEventListener("click", function () {
+arrowSTR.addEventListener("click", function () {
   warrior.STR++;
   defineAtributes(warrior);
-  document.getElementById("STR").textContent = warrior.STR;
-  document.getElementById(
-    "ATK"
-  ).textContent = `${warrior.minAtk} - ${warrior.maxAtk}`;
-  document.getElementById("HP").textContent = `${warrior.HP}/${warrior.maxHP}`;
+  writeStats();
   percentPlayer = definePercentages(warrior.maxHP, warrior.HP);
   updateProgressBarPlayer(playerBar, warrior.HP, warrior.maxHP, percentPlayer);
 });
 
-//Buton DEX
-document.querySelector(".arrow-dex").addEventListener("click", function () {
+//Button DEX
+arrowDEX.addEventListener("click", function () {
   warrior.DEX++;
   defineAtributes(warrior);
-  document.getElementById("DEX").textContent = warrior.DEX;
-  document.getElementById("ACC").textContent = warrior.ACC;
-  document.getElementById("DEF").textContent = warrior.DEF;
+  writeStats();
 });
 
-//Buton AGI
-document.querySelector(".arrow-agi").addEventListener("click", function () {
+//Button AGI
+arrowAGI.addEventListener("click", function () {
   warrior.AGI++;
   defineAtributes(warrior);
-  document.getElementById("AGI").textContent = warrior.AGI;
-  document.getElementById("SPD").textContent = warrior.SPD;
+  writeStats();
 });
 
-//Buton VIT
-document.querySelector(".arrow-vit").addEventListener("click", function () {
+//Button VIT
+arrowVIT.addEventListener("click", function () {
   warrior.VIT++;
   defineAtributes(warrior);
-  document.getElementById("VIT").textContent = warrior.VIT;
-  document.getElementById("HP").textContent = `${warrior.HP}/${warrior.maxHP}`;
-  document.getElementById("DEF").textContent = warrior.DEF;
+  writeStats();
   percentPlayer = definePercentages(warrior.maxHP, warrior.HP);
   updateProgressBarPlayer(playerBar, warrior.HP, warrior.maxHP, percentPlayer);
 });
 
-//Buton INT
-document.querySelector(".arrow-int").addEventListener("click", function () {
+//Button INT
+arrowINT.addEventListener("click", function () {
   warrior.INT++;
   defineAtributes(warrior);
-  document.getElementById("INT").textContent = warrior.INT;
-  document.getElementById("SP").textContent = `${warrior.SP}/${warrior.maxSP}`;
-  document.getElementById("MAG").textContent = warrior.MAG;
+  writeStats();
 });
 
 // -------------------------LVL Sistem------------------------- //
@@ -152,8 +182,7 @@ let Javali = new Monster(200);
 console.log(Javali.HP);
 
 // -------------------------Health Bar------------------------- //
-const pBar01 = document.querySelector(".progress__mob");
-const playerBar = document.querySelector(".progress__player");
+
 //Definir dano recebido
 function damageDealt(atk, minAtk) {
   return Math.trunc(Math.random() * atk) + minAtk;
@@ -185,7 +214,8 @@ console.log(percentPlayer);
 updateProgressBarPlayer(playerBar, warrior.HP, warrior.maxHP, percentPlayer);
 
 // -------------------------Attacks------------------------- //
-document.querySelector("#sword").addEventListener("click", function () {
+
+swordAttack.addEventListener("click", function () {
   //
   Javali.HP = Javali.HP - damageDealt(warrior.maxAtk, warrior.minAtk);
   console.log(Javali.HP);
@@ -194,3 +224,24 @@ document.querySelector("#sword").addEventListener("click", function () {
   //
   updateProgressBar(pBar01, Javali.HP, percentMob);
 });
+
+///////////
+
+//
+//
+//
+//
+// LOOP With timeout for sprite animation Test
+// var i = 0; //  set your counter to 1
+// function myLoop() {
+//   //  create a loop function
+//   setTimeout(function () {
+//     //  call a 3s setTimeout when the loop is called
+//     document.querySelector(".sprite").src = `Test/sprite attack/${i}.png`; //  your code here
+//     i++; //  increment the counter
+//     if (i <= 4) {
+//       //  if the counter < 10, call the loop function
+//       myLoop(); //  ..  again which will trigger another
+//     } //  ..  setTimeout()
+//   }, 70);
+// }

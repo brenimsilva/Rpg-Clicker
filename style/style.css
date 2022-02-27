@@ -261,6 +261,87 @@ td:active {
   transform: translate(1%, -1%);
 }
 
+.arrow {
+  width: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.arrow:hover {
+  filter: drop-shadow(1px 1px 0.5px#f0f0f0);
+  transform: translate(5%, -5%);
+}
+
+.progress__mob {
+  position: relative;
+  width: 210px;
+  height: 22px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+  margin-top: 20px;
+}
+
+.progress__mob:hover {
+}
+
+.progress__player {
+  position: relative;
+  width: 110px;
+  height: 22px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+  margin-top: 20px;
+  margin-left: 50px;
+}
+
+.progress__fill,
+.progress__fill__player {
+  width: 75%;
+  height: 100%;
+  border-radius: 15px;
+  background-color: #dd5a65;
+  transition: all 0.2s;
+  box-shadow: inset 1px 1px 7.5px 1.5px black, inset -1px -1px 0.5px 1.5px black;
+}
+
+.progress__text {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translateY(-50%);
+  color: rgb(224, 214, 165);
+  text-shadow: 2px 2px 1px black;
+}
+
+.progress__text__player {
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  margin-right: 5%;
+  transform: translateY(-50%);
+  color: rgb(224, 214, 165);
+  text-shadow: 2px 2px 1px black;
+  font-size: 12px;
+}
+
+main {
+  height: 56rem;
+  margin-top: 0px;
+}
+
+/* .sprite {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  } */
+
+/* Testes */
+
+/* .hidden {
+  display: none;
+} */
+
+/* MEDIA */
 @media (min-width: 2100px) {
   .icons {
     right: 600px;
@@ -268,6 +349,10 @@ td:active {
   body {
     width: 75%;
     margin-left: 12%;
+  }
+  footer {
+    width: 135%;
+    right: 15%;
   }
 }
 @media (max-width: 1800px) {
@@ -320,82 +405,3 @@ td:active {
     bottom: 150px;
   }
 }
-
-.arrow {
-  width: 10px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-}
-
-.arrow:hover {
-  filter: drop-shadow(1px 1px 0.5px#f0f0f0);
-  transform: translate(5%, -5%);
-}
-
-.progress__mob {
-  position: relative;
-  width: 210px;
-  height: 22px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 15px;
-  margin-top: 20px;
-}
-
-.progress__mob:hover {
-}
-
-.progress__player {
-  position: relative;
-  width: 110px;
-  height: 22px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 15px;
-  margin-top: 20px;
-  margin-left: 50px;
-}
-.progress__fill,
-.progress__fill__player {
-  width: 75%;
-  height: 100%;
-  border-radius: 15px;
-  background-color: #dd5a65;
-  transition: all 0.2s;
-  box-shadow: inset 1px 1px 7.5px 1.5px black, inset -1px -1px 0.5px 1.5px black;
-}
-
-.progress__text {
-  position: absolute;
-  top: 50%;
-  left: 40%;
-  transform: translateY(-50%);
-  color: rgb(224, 214, 165);
-  text-shadow: 2px 2px 1px black;
-}
-
-.progress__text__player {
-  position: absolute;
-  top: 50%;
-  left: 15%;
-  margin-right: 5%;
-  transform: translateY(-50%);
-  color: rgb(224, 214, 165);
-  text-shadow: 2px 2px 1px black;
-  font-size: 12px;
-}
-
-main {
-  height: 56rem;
-  margin-top: 0px;
-}
-
-/* .sprite {
-  position: absolute;
-  top: 50%;
-  left: 10%;
-  } */
-
-/* Testes */
-
-/* .hidden {
-  display: none;
-} */
