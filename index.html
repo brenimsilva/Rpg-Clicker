@@ -6,159 +6,162 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style/style.css" />
     <link rel="stylesheet" href="fonts/fonts.css" />
-    <title>Document</title>
+    <title>Rpg Clicker!</title>
   </head>
   <body>
-    <header>
-      <div class="top-links"></div>
-      <img
-        src="Images/Terrain/Jungle01-Flip.png"
-        alt="background"
-        id="bg-monster"
-      />
-      <div class="top-left"></div>
-      <div class="top-right" class="monster-status">
-        <img src="Images/Rex-Cat-flip.png" alt="monster" class="monster" />
-        <!---
+    <main>
+      <header>
+        <div class="top-links"></div>
+        <img
+          src="Images/Terrain/Jungle01-Flip.png"
+          alt="background"
+          id="bg-monster"
+        />
+        <div class="top-left"></div>
+        <div class="top-right" class="monster-status">
+          <img src="Images/Rex-Cat-flip.png" alt="monster" class="monster" />
+          <!---
         <div class="progress-bar">
           <div class="progress-bar-value">65%</div>
           <div class="progress-bar-fill"></div>
         </div>-->
-        <div class="progress__mob">
-          <div class="progress__fill"></div>
-          <span class="progress__text">25</span>
+          <div class="progress__mob">
+            <div class="progress__fill"></div>
+            <span class="progress__text">25</span>
+          </div>
         </div>
-      </div>
-    </header>
-    <div class="bottom">
-      <img src="Images/Terrain/Jungle01.png" alt="background" id="bg-hero" />
-      <div class="bottom-left">
-        <img src="Images/hero.png" alt="hero" id="hero" />
-        <!--------------Player Stats-------------->
+      </header>
+      <div class="bottom">
+        <img src="Images/Terrain/Jungle01.png" alt="background" id="bg-hero" />
+        <div class="bottom-left">
+          <img src="Images/hero.png" alt="hero" id="hero" />
+          <!--------------Player Stats-------------->
 
-        <div class="progress__player">
-          <div class="progress__fill__player"></div>
-          <span class="progress__text__player">120</span>
+          <div class="progress__player">
+            <div class="progress__fill__player"></div>
+            <span class="progress__text__player">120</span>
+          </div>
+          <div class="hero-information">
+            <table class="hero-stats" cellspacing="4">
+              <div id="glass"></div>
+              <thead>
+                <tr>
+                  <th>Stats</th>
+                  <th>Atb.</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="stat-name">
+                    STR <span id="STR">0</span>
+                    <img
+                      src="Images/arrow-right-pixel-white.png"
+                      class="arrow arrow-str"
+                    />
+                  </td>
+                  <td class="stat-name">HP <span id="HP">0</span></td>
+                  <td class="stat-name">ACC <span id="ACC">0</span></td>
+                </tr>
+                <tr>
+                  <td class="stat-name">
+                    DEX <span id="DEX">0</span>
+                    <img
+                      src="Images/arrow-right-pixel-white.png"
+                      class="arrow arrow-dex"
+                    />
+                  </td>
+                  <td class="stat-name">SP <span id="SP">0</span></td>
+                  <td class="stat-name">SPD <span id="SPD">0</span></td>
+                </tr>
+                <tr>
+                  <td class="stat-name">
+                    AGI <span id="AGI">0</span>
+                    <img
+                      src="Images/arrow-right-pixel-white.png"
+                      class="arrow arrow-agi"
+                    />
+                  </td>
+                  <td class="stat-name">ATK <span id="ATK">0</span></td>
+                </tr>
+                <tr>
+                  <td class="stat-name">
+                    VIT <span id="VIT">0</span>
+                    <img
+                      src="Images/arrow-right-pixel-white.png"
+                      class="arrow arrow-vit"
+                    />
+                  </td>
+                  <td class="stat-name">MAG <span id="MAG">0</span></td>
+                </tr>
+                <tr>
+                  <td class="stat-name">
+                    INT <span id="INT">0</span>
+                    <img
+                      src="Images/arrow-right-pixel-white.png"
+                      class="arrow arrow-int"
+                    />
+                  </td>
+                  <td class="stat-name">DEF <span id="DEF">0</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div class="hero-information">
-          <table class="hero-stats" cellspacing="4">
-            <div id="glass"></div>
-            <thead>
-              <tr>
-                <th>Stats</th>
-                <th>Atb.</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="stat-name">
-                  STR <span id="STR">0</span>
-                  <img
-                    src="Images/arrow-right-pixel-white.png"
-                    class="arrow arrow-str"
-                  />
-                </td>
-                <td class="stat-name">HP <span id="HP">0</span></td>
-                <td class="stat-name">ACC <span id="ACC">0</span></td>
-              </tr>
-              <tr>
-                <td class="stat-name">
-                  DEX <span id="DEX">0</span>
-                  <img
-                    src="Images/arrow-right-pixel-white.png"
-                    class="arrow arrow-dex"
-                  />
-                </td>
-                <td class="stat-name">SP <span id="SP">0</span></td>
-                <td class="stat-name">SPD <span id="SPD">0</span></td>
-              </tr>
-              <tr>
-                <td class="stat-name">
-                  AGI <span id="AGI">0</span>
-                  <img
-                    src="Images/arrow-right-pixel-white.png"
-                    class="arrow arrow-agi"
-                  />
-                </td>
-                <td class="stat-name">ATK <span id="ATK">0</span></td>
-              </tr>
-              <tr>
-                <td class="stat-name">
-                  VIT <span id="VIT">0</span>
-                  <img
-                    src="Images/arrow-right-pixel-white.png"
-                    class="arrow arrow-vit"
-                  />
-                </td>
-                <td class="stat-name">MAG <span id="MAG">0</span></td>
-              </tr>
-              <tr>
-                <td class="stat-name">
-                  INT <span id="INT">0</span>
-                  <img
-                    src="Images/arrow-right-pixel-white.png"
-                    class="arrow arrow-int"
-                  />
-                </td>
-                <td class="stat-name">DEF <span id="DEF">0</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="bottom-middle">
-        <!---------------- POPUP Actions ---------------->
+        <div class="bottom-middle">
+          <!---------------- POPUP Actions ---------------->
 
-        <!-- <button onclick="togglePopup()">Actions</button>
+          <!-- <button onclick="togglePopup()">Actions</button>
         <div class="popup" id="popup-1">
           <div class="overlay"></div>
           <div class="content">
             <div class="close-btn">&times;</div> -->
-        <table class="icons">
-          <tr class="tr-icons">
-            <td id="td-sword">
-              <img src="Images/Icons/Sword03.png" alt="sword" id="sword" />
-            </td>
-            <td class="info">Attack</td>
-          </tr>
-          <tr class="tr-icons">
-            <td>
-              <img
-                src="Images/Icons/Potion03.png"
-                alt="HP-Potion"
-                id="HP-Potion"
-              />
-            </td>
-            <td>
-              HP Potion
-              <span class="qtd" id="hp-qtd"> (1)</span>
-            </td>
-          </tr>
-          <tr class="tr-icons">
-            <td>
-              <img
-                src="Images/Icons/SP-Potion01.png"
-                alt="SP-Potion"
-                id="SP-Potion"
-              />
-            </td>
-            <td>
-              SP Potion
-              <span class="qtd" id="sp-qtd"> (3)</span>
-            </td>
-          </tr>
-          <tr class="tr-icons">
-            <td>
-              <img src="Images/Icons/Coins01.png" alt="coins" id="coins" />
-            </td>
-            <td>Coins <span class="qtd"> 999999</span></td>
-          </tr>
-        </table>
-        <!-- </div>
+          <table class="icons hidden">
+            <tr class="tr-icons">
+              <td id="td-sword">
+                <img src="Images/Icons/Sword03.png" alt="sword" id="sword" />
+              </td>
+              <td class="info">Attack</td>
+            </tr>
+            <tr class="tr-icons">
+              <td>
+                <img
+                  src="Images/Icons/Potion03.png"
+                  alt="HP-Potion"
+                  id="HP-Potion"
+                />
+              </td>
+              <td>
+                HP Potion
+                <span class="qtd" id="hp-qtd"> (1)</span>
+              </td>
+            </tr>
+            <tr class="tr-icons">
+              <td>
+                <img
+                  src="Images/Icons/SP-Potion01.png"
+                  alt="SP-Potion"
+                  id="SP-Potion"
+                />
+              </td>
+              <td>
+                SP Potion
+                <span class="qtd" id="sp-qtd"> (3)</span>
+              </td>
+            </tr>
+            <tr class="tr-icons">
+              <td>
+                <img src="Images/Icons/Coins01.png" alt="coins" id="coins" />
+              </td>
+              <td>Coins <span class="qtd"> 999999</span></td>
+            </tr>
+          </table>
+          <!-- </div>
                 </div> -->
+        </div>
+        <div class="bottom-right"></div>
       </div>
-      <div class="bottom-right"></div>
-    </div>
+    </main>
+    <!-- <img src="Test/Sprite attack/0.png" alt="" class="sprite" /> -->
     <footer><p class="footer-info">Made by: @brenimsilva</p></footer>
     <script src="script/script.js"></script>
   </body>
