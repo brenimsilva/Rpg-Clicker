@@ -31,17 +31,24 @@ header {
 }
 
 footer {
-  position: absolute;
+  position: relative;
   width: 100%;
   background-color: rgb(0, 0, 0);
   bottom: 0;
   color: aliceblue;
-  bottom: 1px;
+  bottom: 0px;
   min-height: 40px;
   padding: 0px;
   display: flex;
   text-align: center;
+  margin-top: auto;
 }
+/* 
+@media (min-height: 900px) {
+  .footer {
+    bottom: 1px;
+  }
+} */
 
 .footer-info {
   text-align: center;
@@ -375,3 +382,20 @@ td:active {
   text-shadow: 2px 2px 1px black;
   font-size: 12px;
 }
+
+main {
+  height: 56rem;
+  margin-top: 0px;
+}
+
+/* .sprite {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  } */
+
+/* Testes */
+
+/* .hidden {
+  display: none;
+} */
