@@ -6,6 +6,20 @@ const monsterSprite = document.querySelector(".monster");
 const iconsSession = document.querySelector(".icons");
 const swordAttack = document.getElementById("sword");
 
+// Stats and Attributes Variables;
+const statSTR = document.getElementById('STR');
+const statDEX = document.getElementById('DEX');
+const statAGI = document.getElementById('AGI');
+const statVIT = document.getElementById('VIT');
+const statINT = document.getElementById('INT');
+const statHP = document.getElementById('HP');
+const statSP = document.getElementById('SP');
+const statATK =  document.getElementById('ATK');
+const statDEF = document.getElementById("DEF");
+const statMAG = document.getElementById("MAG");
+const statACC = document.getElementById("ACC");
+const statSPD = document.getElementById("SPD");
+
 // Points in Stats
 const arrowGeneral = document.querySelector(".arrow");
 const arrowSTR = document.querySelector(".arrow-str");
@@ -77,23 +91,21 @@ for (let element in warrior) {
 // Showing hero Stats in HTML (.hero-stats class)
 function writeStats() {
   //Stats Initialization
-  document.getElementById("STR").textContent = warrior.STR;
-  document.getElementById("DEX").textContent = warrior.DEX;
-  document.getElementById("AGI").textContent = warrior.AGI;
-  document.getElementById("VIT").textContent = warrior.VIT;
-  document.getElementById("INT").textContent = warrior.INT;
-  defineAtributes(warrior);
+  statSTR.textContent = warrior.STR;
+  statDEX.textContent = warrior.DEX;
+  statAGI.textContent = warrior.AGI;
+  statVIT.textContent = warrior.VIT;
+  statINT.textContent = warrior.INT;
+  
 
   //Atribute initialization
-  document.getElementById("HP").textContent = `${warrior.HP}/${warrior.maxHP}`;
-  document.getElementById("SP").textContent = `${warrior.SP}/${warrior.maxSP}`;
-  document.getElementById(
-    "ATK"
-  ).textContent = `${warrior.minAtk} - ${warrior.maxAtk}`;
-  document.getElementById("MAG").textContent = warrior.MAG;
-  document.getElementById("DEF").textContent = warrior.DEF;
-  document.getElementById("ACC").textContent = warrior.ACC;
-  document.getElementById("SPD").textContent = warrior.SPD;
+  statHP.textContent = `${warrior.HP}/${warrior.maxHP}`;
+  statSP.textContent = `${warrior.SP}/${warrior.maxSP}`;
+  statATK.textContent = `${warrior.minAtk} - ${warrior.maxAtk}`;
+  statMAG.textContent = warrior.MAG;
+  statDEF.textContent = warrior.DEF;
+  statACC.textContent = warrior.ACC;
+  statSPD.textContent = warrior.SPD;
 }
 
 //Do the math for Attributes based on Hero Stats Points.
@@ -106,69 +118,49 @@ function defineAtributes(heroe) {
   heroe.MAG = heroe.INT * 4;
   heroe.SPD = heroe.AGI * 3;
   heroe.maxSP = heroe.INT * 5;
+  writeStats();
 }
 
 //Initializing Stats
-writeStats(); // CORRIGIR
+// CORRIGIR
+defineAtributes(warrior);
 warrior.HP = warrior.maxHP;
 warrior.SP = warrior.maxSP;
-writeStats();
+defineAtributes(warrior);
+
 
 // -------------------------Upgrade Stats------------------------- //
-
-// const clickArrow = () => {
-//   defineAtributes(warrior);
-//   writeStats();
-//     if(document.querySelector('.arrow').classList.contains('.arrow-str') || document.querySelector('.arrow').classList.contains('.arrow-vit')) {
-//       updateProgressBarPlayer(playerBar, warrior.HP, warrior.maxHP, definePercentages(warrior.maxHP, warrior.HP))
-//     }
-// }
-
-//Button all
-
-// document.querySelector('.arrow').addEventListener('click', function(){
-//   switch(true) {
-//     case ()
-//   }
-// })
 
 //Buton STR
 arrowSTR.addEventListener("click", function () {
   warrior.STR++;
   defineAtributes(warrior);
-  writeStats();
-  percentPlayer = definePercentages(warrior.maxHP, warrior.HP);
-  updateProgressBarPlayer(playerBar, warrior.HP, warrior.maxHP, percentPlayer);
+  updateProgressBarPlayer(playerBar, warrior.HP, warrior.maxHP, definePercentages(warrior.maxHP, warrior.HP));
 });
 
 //Button DEX
 arrowDEX.addEventListener("click", function () {
   warrior.DEX++;
   defineAtributes(warrior);
-  writeStats();
 });
 
 //Button AGI
 arrowAGI.addEventListener("click", function () {
   warrior.AGI++;
   defineAtributes(warrior);
-  writeStats();
 });
 
 //Button VIT
 arrowVIT.addEventListener("click", function () {
   warrior.VIT++;
   defineAtributes(warrior);
-  writeStats();
-  percentPlayer = definePercentages(warrior.maxHP, warrior.HP);
-  updateProgressBarPlayer(playerBar, warrior.HP, warrior.maxHP, percentPlayer);
+  updateProgressBarPlayer(playerBar, warrior.HP, warrior.maxHP, definePercentages(warrior.maxHP, warrior.HP));
 });
 
 //Button INT
 arrowINT.addEventListener("click", function () {
   warrior.INT++;
   defineAtributes(warrior);
-  writeStats();
 });
 
 // -------------------------LVL Sistem------------------------- //
@@ -178,7 +170,7 @@ function Monster(maxHP, HP = maxHP) {
   this.maxHP = maxHP;
   this.HP = HP;
 }
-let Javali = new Monster(200);
+const Javali = new Monster(200);
 console.log(Javali.HP);
 
 // -------------------------Health Bar------------------------- //
@@ -204,27 +196,29 @@ function updateProgressBarPlayer(pbar, hp, maxHp, percentage) {
 }
 
 //PERCENT MOB
-let percentMob = definePercentages(Javali.maxHP, Javali.HP);
-console.log(percentMob);
-updateProgressBar(pBar01, Javali.HP, percentMob);
+updateProgressBar(pBar01, Javali.HP, definePercentages(Javali.maxHP, Javali.HP));
+console.log(definePercentages(Javali.maxHP, Javali.HP))
 
 //PERCENT PLAYER
-let percentPlayer = definePercentages(warrior.maxHP, warrior.HP);
-console.log(percentPlayer);
-updateProgressBarPlayer(playerBar, warrior.HP, warrior.maxHP, percentPlayer);
+updateProgressBarPlayer(playerBar, warrior.HP, warrior.maxHP, definePercentages(warrior.maxHP, warrior.HP));
 
-// -------------------------Attacks------------------------- //
+// <-------------------------Attacks-------------------------> //
 
+//ATTACK MOB
 swordAttack.addEventListener("click", function () {
-  //
   Javali.HP = Javali.HP - damageDealt(warrior.maxAtk, warrior.minAtk);
   console.log(Javali.HP);
   //
-  percentMob = definePercentages(Javali.maxHP, Javali.HP);
-  //
-  updateProgressBar(pBar01, Javali.HP, percentMob);
+  updateProgressBar(pBar01, Javali.HP, definePercentages(Javali.maxHP, Javali.HP));
+  console.log(definePercentages(Javali.maxHP, Javali.HP));
 });
+//ATTACK PLAYER
 
+
+
+
+
+//TEST SECTION
 ///////////
 
 //
@@ -232,16 +226,17 @@ swordAttack.addEventListener("click", function () {
 //
 //
 // LOOP With timeout for sprite animation Test
-// var i = 0; //  set your counter to 1
-// function myLoop() {
-//   //  create a loop function
-//   setTimeout(function () {
-//     //  call a 3s setTimeout when the loop is called
-//     document.querySelector(".sprite").src = `Test/sprite attack/${i}.png`; //  your code here
-//     i++; //  increment the counter
-//     if (i <= 4) {
-//       //  if the counter < 10, call the loop function
-//       myLoop(); //  ..  again which will trigger another
-//     } //  ..  setTimeout()
-//   }, 70);
-// }
+//  var i = 0; //  set your counter to 1
+//  function myLoop() {
+//    //  create a loop function
+//    setTimeout(function () {
+//      //  call a 3s setTimeout when the loop is called
+//      document.querySelector(".sprite").src = `Test/sprite attack/${i}.png`; //  your code here
+//      i++; //  increment the counter
+//      if (i <= 4) {
+//        //  if the counter < 10, call the loop function
+//        myLoop(); //  ..  again which will trigger another
+//      } //  ..  setTimeout()
+//    }, 70);
+//  }
+
