@@ -5,7 +5,7 @@ const playerBar = document.querySelector(".progress__player");
 const expBar = document.querySelector(".exp");
 const monsterSprite = document.querySelector(".monster");
 const iconsSession = document.querySelector(".icons");
-const swordAttack = document.getElementById("sword");
+const swordAttack = document.querySelector(".sword");
 
 // Stats and Attributes Variables;
 const heroLvl = document.getElementById("lvl");
@@ -37,13 +37,14 @@ const respawn = (monster) => {
   //Recharge HP
   monster.HP = monster.maxHP;
   //Update HP Bar number and fill stats
-  updateProgressBar(
+  updateMobHpBar(
     mobBar,
     monster.maxHP,
     definePercentages(monster.maxHP, monster.HP)
   );
 };
 
+let isDead = false;
 // Calc exp to next Lvl and put it on screen
 const calcExp = () => {};
 // -------------------------Define Objects------------------------- //
@@ -227,7 +228,7 @@ function definePercentages(higherValue, lowerValue = higherValue) {
 }
 
 //Muda os valores na barra de acordo com a porcentagem e o dano
-function updateProgressBar(pbar, hp, percentage) {
+function updateMobHpBar(pbar, hp, percentage) {
   pbar.querySelector(".progress__fill").style.width = percentage;
   pbar.querySelector(".progress__text").textContent = hp;
 }
@@ -267,11 +268,7 @@ function updateExpBar(bar) {
 }
 ////////////////////////
 //PERCENT MOB
-updateProgressBar(
-  mobBar,
-  Javali.HP,
-  definePercentages(Javali.maxHP, Javali.HP)
-);
+updateMobHpBar(mobBar, Javali.HP, definePercentages(Javali.maxHP, Javali.HP));
 console.log(definePercentages(Javali.maxHP, Javali.HP));
 
 //PERCENT PLAYER
@@ -292,41 +289,40 @@ updateExpBar(
 
 // <-------------------------Attacks-------------------------> //
 
+isDead = false;
 //ATTACK MOB
-let canAttack = true;
-swordAttack.onclick = function () {
+document.querySelector(".sword-attack").addEventListener("click", function () {
   //Receive Damage
   Javali.HP = Javali.HP - damageDealt(warrior.maxAtk, warrior.minAtk);
   console.log(Javali.HP);
   //Check if mob is still alive
   if (Javali.HP > 0) {
-    //
-    updateProgressBar(
+    updateMobHpBar(
       mobBar,
       Javali.HP,
       definePercentages(Javali.maxHP, Javali.HP)
     );
-    console.log(definePercentages(Javali.maxHP, Javali.HP));
   } else {
     //Corrigir nao pode bater depois que morrer
     //Give player EXP
     warrior.EXP += Javali.EXP;
     updateExpBar(expBar);
-    Javali.HP = Infinity;
-    // Javali.HP = 0;
-    // updateProgressBar(
-    //   mobBar,
-    //   Javali.HP,
-    //   definePercentages(Javali.maxHP, Javali.HP)
-    // );
-    console.log(definePercentages(Javali.maxHP, Javali.HP));
+    //Javali.HP = Infinity;
+    Javali.HP = 0;
+    updateMobHpBar(
+      mobBar,
+      Javali.HP,
+      definePercentages(Javali.maxHP, Javali.HP)
+    );
     monsterSprite.classList.add("fade-out");
+
+    respawn(Javali);
     setTimeout(() => {
       monsterSprite.classList.remove("fade-out");
-      respawn(Javali);
     }, 500);
   }
-};
+});
+
 //ATTACK PLAYER
 
 //TEST SECTION
