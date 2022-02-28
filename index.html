@@ -33,14 +33,22 @@
       </header>
       <div class="bottom">
         <img src="Images/Terrain/Jungle01.png" alt="background" id="bg-hero" />
-        <div class="bottom-left">
-          <img src="Images/hero.png" alt="hero" id="hero" />
-          <!--------------Player Stats-------------->
-
-          <div class="progress__player">
-            <div class="progress__fill__player"></div>
-            <span class="progress__text__player">120</span>
+        <div class="bottom-left three">
+          <div class="hero-section">
+            <img src="Images/hero.png" alt="hero" id="hero" />
+            <div class="progress__player">
+              <div class="progress__fill__player"></div>
+              <span class="progress__text__player">120</span>
+            </div>
+            <div class="exp">
+              <div class="exp-fill"></div>
+              <span class="exp-text">0/20</span>
+            </div>
+            <div class="hero-level">
+              <span class="hero-level-text">Lvl:<span id="lvl">1</span></span>
+            </div>
           </div>
+          <!--------------Player Stats-------------->
           <div class="hero-information">
             <table class="hero-stats" cellspacing="4">
               <div id="glass"></div>
@@ -53,61 +61,79 @@
               <tbody>
                 <tr>
                   <td class="stat-name">
-                    STR <span id="STR">0</span>
+                    <span class="stat">STR </span> <span id="STR">0</span>
                     <img
                       src="Images/arrow-right-pixel-white.png"
-                      class="arrow arrow-str"
+                      class="arrow arrow-STR"
                     />
                   </td>
-                  <td class="stat-name">HP <span id="HP">0</span></td>
-                  <td class="stat-name">ACC <span id="ACC">0</span></td>
+                  <td class="stat-name">
+                    <span class="attribute">HP </span><span id="HP">0</span>
+                  </td>
+                  <td class="stat-name">
+                    <span class="attribute">ACC </span> <span id="ACC">0</span>
+                  </td>
                 </tr>
                 <tr>
                   <td class="stat-name">
-                    DEX <span id="DEX">0</span>
+                    <span class="stat">DEX </span> <span id="DEX">0</span>
                     <img
                       src="Images/arrow-right-pixel-white.png"
-                      class="arrow arrow-dex"
+                      class="arrow arrow-DEX"
                     />
                   </td>
-                  <td class="stat-name">SP <span id="SP">0</span></td>
-                  <td class="stat-name">SPD <span id="SPD">0</span></td>
+                  <td class="stat-name">
+                    <span class="attribute">SP </span> <span id="SP">0</span>
+                  </td>
+                  <td class="stat-name">
+                    <span class="attribute">SPD </span> <span id="SPD">0</span>
+                  </td>
                 </tr>
                 <tr>
                   <td class="stat-name">
-                    AGI <span id="AGI">0</span>
+                    <span class="stat">AGI </span> <span id="AGI">0</span>
                     <img
                       src="Images/arrow-right-pixel-white.png"
-                      class="arrow arrow-agi"
+                      class="arrow arrow-AGI"
                     />
                   </td>
-                  <td class="stat-name">ATK <span id="ATK">0</span></td>
+                  <td class="stat-name">
+                    <span class="attribute">ATK </span> <span id="ATK">0</span>
+                  </td>
+                  <td class="stat-name">
+                    <span class="attribute-box-text">AP </span>
+                    <span id="attribute-points">0</span>
+                  </td>
                 </tr>
                 <tr>
                   <td class="stat-name">
-                    VIT <span id="VIT">0</span>
+                    <span class="stat">VIT </span> <span id="VIT">0</span>
                     <img
                       src="Images/arrow-right-pixel-white.png"
-                      class="arrow arrow-vit"
+                      class="arrow arrow-VIT"
                     />
                   </td>
-                  <td class="stat-name">MAG <span id="MAG">0</span></td>
+                  <td class="stat-name">
+                    <span class="attribute">MAG </span> <span id="MAG">0</span>
+                  </td>
                 </tr>
                 <tr>
                   <td class="stat-name">
-                    INT <span id="INT">0</span>
+                    <span class="stat">INT </span> <span id="INT">0</span>
                     <img
                       src="Images/arrow-right-pixel-white.png"
-                      class="arrow arrow-int"
+                      class="arrow arrow-INT"
                     />
                   </td>
-                  <td class="stat-name">DEF <span id="DEF">0</span></td>
+                  <td class="stat-name">
+                    <span class="attribute">DEF </span> <span id="DEF">0</span>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
-        <div class="bottom-middle">
+        <div class="bottom-middle three">
           <!---------------- POPUP Actions ---------------->
 
           <!-- <button onclick="togglePopup()">Actions</button>
@@ -158,7 +184,7 @@
           <!-- </div>
                 </div> -->
         </div>
-        <div class="bottom-right"></div>
+        <div class="bottom-right three"></div>
       </div>
     </main>
     <!-- <img src="Test/Sprite attack/0.png" alt="" class="sprite" /> -->
@@ -166,5 +192,3 @@
   </body>
   <footer><p class="footer-info">Made by: @brenimsilva</p></footer>
 </html>
-
-

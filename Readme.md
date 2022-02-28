@@ -1,5 +1,9 @@
 ##### RoadMap
 
+KWOWN BUGS:
+
+HP Bar and Text when mob dies not showing proper value.
+
 ###### Hero Stats
 
 There are two types of stats, Attributes and Stats
@@ -64,10 +68,17 @@ Speed, Atack Speed/Chance to Dodge
 
 ---
 
--Animation damage delt, received, healed and missed
--Max ATK
--Min ATK
--How often you can hit close to Max Atk will be determined by your DEX
+<ul>
+<li>Animation damage delt, received, healed and missed</li>
+<li>-Max ATK</li>
+<li>-Min ATK</li>
+<li>-How often you can hit close to Max Atk will be determined by your DEX</li>
+<li>-HP Bar change colors depending on %</li>
+<li>-Ascencion Points when reseting</li>
+<li>-Menu for ascencion Points</li>
+<li>-Weapon lvl Up (forge) with coins</li>
+<li>-Defense affecting ATK Received and Dealt</li>
+</ul>
 
 ---
 

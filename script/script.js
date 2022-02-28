@@ -1,35 +1,51 @@
 "use strict";
 // Define Variables
-const pBar01 = document.querySelector(".progress__mob");
+const mobBar = document.querySelector(".progress__mob");
 const playerBar = document.querySelector(".progress__player");
+const expBar = document.querySelector(".exp");
 const monsterSprite = document.querySelector(".monster");
 const iconsSession = document.querySelector(".icons");
 const swordAttack = document.getElementById("sword");
 
 // Stats and Attributes Variables;
-const statSTR = document.getElementById('STR');
-const statDEX = document.getElementById('DEX');
-const statAGI = document.getElementById('AGI');
-const statVIT = document.getElementById('VIT');
-const statINT = document.getElementById('INT');
-const statHP = document.getElementById('HP');
-const statSP = document.getElementById('SP');
-const statATK =  document.getElementById('ATK');
+const heroLvl = document.getElementById("lvl");
+const statSTR = document.getElementById("STR");
+const statDEX = document.getElementById("DEX");
+const statAGI = document.getElementById("AGI");
+const statVIT = document.getElementById("VIT");
+const statINT = document.getElementById("INT");
+const statHP = document.getElementById("HP");
+const statSP = document.getElementById("SP");
+const statATK = document.getElementById("ATK");
 const statDEF = document.getElementById("DEF");
 const statMAG = document.getElementById("MAG");
 const statACC = document.getElementById("ACC");
 const statSPD = document.getElementById("SPD");
+const atributePoints = document.getElementById("attribute-points");
 
 // Points in Stats
 const arrowGeneral = document.querySelector(".arrow");
-const arrowSTR = document.querySelector(".arrow-str");
-const arrowDEX = document.querySelector(".arrow-dex");
-const arrowAGI = document.querySelector(".arrow-agi");
-const arrowVIT = document.querySelector(".arrow-vit");
-const arrowINT = document.querySelector(".arrow-int");
+const arrowSTR = document.querySelector(".arrow-STR");
+const arrowDEX = document.querySelector(".arrow-DEX");
+const arrowAGI = document.querySelector(".arrow-AGI");
+const arrowVIT = document.querySelector(".arrow-VIT");
+const arrowINT = document.querySelector(".arrow-INT");
 
-//
+// Functions
+// Respawn monster
+const respawn = (monster) => {
+  //Recharge HP
+  monster.HP = monster.maxHP;
+  //Update HP Bar number and fill stats
+  updateProgressBar(
+    mobBar,
+    monster.maxHP,
+    definePercentages(monster.maxHP, monster.HP)
+  );
+};
 
+// Calc exp to next Lvl and put it on screen
+const calcExp = () => {};
 // -------------------------Define Objects------------------------- //
 function heroes(
   nameHero,
@@ -45,6 +61,7 @@ function heroes(
   INT,
   atributePoints,
   EXP,
+  expNextLevel,
   LVL
 ) {
   this.nameHero = nameHero;
@@ -60,8 +77,8 @@ function heroes(
   this.INT = INT;
   this.atributePoints = atributePoints;
   this.EXP = EXP;
+  this.expNextLevel = expNextLevel;
   this.LVL = LVL;
-  this.ATK = 0;
   this.MAG = 0;
   this.DEF = 0;
   this.ACC = 0;
@@ -69,19 +86,27 @@ function heroes(
   this.minAtk = 0;
   this.maxAtk = 0;
 }
-//Set Warrior Class Values
-const warriorStats = ["Heroe", "Warrior", 50, 50, 0, 0, 3, 2, 1, 2, 1, 0, 0, 1];
 
 //Creating a warrior
-const warrior = new heroes();
+const warrior = new heroes(
+  "Heroe",
+  "Warrior",
+  50,
+  50,
+  0,
+  0,
+  3,
+  2,
+  1,
+  2,
+  1,
+  0,
+  0,
+  20,
+  1
+);
 
-//Attributing values to warrior Obj
-let index = 0;
-for (let element in warrior) {
-  warrior[element] = warriorStats[index];
-  index++;
-}
-
+console.log(warrior);
 // -------------------------Atribute------------------------- //
 
 // function selectAtribute(atribute) {
@@ -96,7 +121,6 @@ function writeStats() {
   statAGI.textContent = warrior.AGI;
   statVIT.textContent = warrior.VIT;
   statINT.textContent = warrior.INT;
-  
 
   //Atribute initialization
   statHP.textContent = `${warrior.HP}/${warrior.maxHP}`;
@@ -112,7 +136,7 @@ function writeStats() {
 function defineAtributes(heroe) {
   heroe.minAtk = Math.round(heroe.STR * 0.3);
   heroe.maxAtk = Math.round(heroe.STR * 1.1);
-  heroe.maxHP = Math.round(heroe.STR * 1.2) + heroe.VIT * 5 + warriorStats[2];
+  heroe.maxHP = Math.round(heroe.STR * 1.2) + heroe.VIT * 5 + 50;
   heroe.ACC = heroe.DEX * 5;
   heroe.DEF = heroe.DEX * 2 + heroe.VIT * 2;
   heroe.MAG = heroe.INT * 4;
@@ -128,49 +152,66 @@ warrior.HP = warrior.maxHP;
 warrior.SP = warrior.maxSP;
 defineAtributes(warrior);
 
-
 // -------------------------Upgrade Stats------------------------- //
+
+function upgradeStats(stat) {
+  document.getElementById(stat);
+  warrior[stat]++;
+  warrior.atributePoints--;
+  atributePoints.textContent = warrior.atributePoints;
+  defineAtributes(warrior);
+  updateProgressBarPlayer(
+    playerBar,
+    warrior.HP,
+    warrior.maxHP,
+    definePercentages(warrior.maxHP, warrior.HP)
+  );
+}
 
 //Buton STR
 arrowSTR.addEventListener("click", function () {
-  warrior.STR++;
-  defineAtributes(warrior);
-  updateProgressBarPlayer(playerBar, warrior.HP, warrior.maxHP, definePercentages(warrior.maxHP, warrior.HP));
+  if (warrior.atributePoints > 0) {
+    upgradeStats("STR");
+  }
 });
 
 //Button DEX
 arrowDEX.addEventListener("click", function () {
-  warrior.DEX++;
-  defineAtributes(warrior);
+  if (warrior.atributePoints > 0) {
+    upgradeStats("DEX");
+  }
 });
 
 //Button AGI
 arrowAGI.addEventListener("click", function () {
-  warrior.AGI++;
-  defineAtributes(warrior);
+  if (warrior.atributePoints > 0) {
+    upgradeStats("AGI");
+  }
 });
 
 //Button VIT
 arrowVIT.addEventListener("click", function () {
-  warrior.VIT++;
-  defineAtributes(warrior);
-  updateProgressBarPlayer(playerBar, warrior.HP, warrior.maxHP, definePercentages(warrior.maxHP, warrior.HP));
+  if (warrior.atributePoints > 0) {
+    upgradeStats("VIT");
+  }
 });
 
 //Button INT
 arrowINT.addEventListener("click", function () {
-  warrior.INT++;
-  defineAtributes(warrior);
+  if (warrior.atributePoints > 0) {
+    upgradeStats("INT");
+  }
 });
 
 // -------------------------LVL Sistem------------------------- //
 
 // -------------------------Mobs------------------------- //
-function Monster(maxHP, HP = maxHP) {
+function Monster(EXP, maxHP, HP = maxHP) {
   this.maxHP = maxHP;
   this.HP = HP;
+  this.EXP = EXP;
 }
-const Javali = new Monster(200);
+const Javali = new Monster(5, 20);
 console.log(Javali.HP);
 
 // -------------------------Health Bar------------------------- //
@@ -181,8 +222,8 @@ function damageDealt(atk, minAtk) {
 }
 
 //Define a porcentagem maxima do HP depois do dano
-function definePercentages(maxhp, curHP = maxhp) {
-  return `${(curHP * 100) / maxhp}%`;
+function definePercentages(higherValue, lowerValue = higherValue) {
+  return `${(lowerValue * 100) / higherValue}%`;
 }
 
 //Muda os valores na barra de acordo com a porcentagem e o dano
@@ -194,29 +235,99 @@ function updateProgressBarPlayer(pbar, hp, maxHp, percentage) {
   pbar.querySelector(".progress__fill__player").style.width = percentage;
   pbar.querySelector(".progress__text__player").textContent = `${hp}/${maxHp}`;
 }
+// ------------------------- EXP BAR -------------------------- //
+//Update Level and Exp Bar
 
+warrior.atributePoints = (warrior.LVL - 1) * 5;
+
+function updateExpBar(bar) {
+  if (warrior.EXP >= warrior.expNextLevel) {
+    warrior.LVL += 1;
+    warrior.atributePoints += 5;
+    atributePoints.textContent = warrior.atributePoints;
+    warrior.EXP = warrior.EXP - warrior.expNextLevel; // Corrigir
+    warrior.expNextLevel = Math.trunc(warrior.expNextLevel * 1.6);
+    bar.querySelector(".exp-fill").style.width = definePercentages(
+      warrior.expNextLevel,
+      warrior.EXP
+    );
+    bar.querySelector(
+      ".exp-text"
+    ).textContent = `${warrior.EXP}/${warrior.expNextLevel}`;
+    heroLvl.textContent = warrior.LVL;
+  } else {
+    bar.querySelector(".exp-fill").style.width = definePercentages(
+      warrior.expNextLevel,
+      warrior.EXP
+    );
+    bar.querySelector(
+      ".exp-text"
+    ).textContent = `${warrior.EXP}/${warrior.expNextLevel}`;
+  }
+}
+////////////////////////
 //PERCENT MOB
-updateProgressBar(pBar01, Javali.HP, definePercentages(Javali.maxHP, Javali.HP));
-console.log(definePercentages(Javali.maxHP, Javali.HP))
+updateProgressBar(
+  mobBar,
+  Javali.HP,
+  definePercentages(Javali.maxHP, Javali.HP)
+);
+console.log(definePercentages(Javali.maxHP, Javali.HP));
 
 //PERCENT PLAYER
-updateProgressBarPlayer(playerBar, warrior.HP, warrior.maxHP, definePercentages(warrior.maxHP, warrior.HP));
+updateProgressBarPlayer(
+  playerBar,
+  warrior.HP,
+  warrior.maxHP,
+  definePercentages(warrior.maxHP, warrior.HP)
+);
+
+updateExpBar(
+  expBar,
+  warrior.EXP,
+  warrior.expNextLevel,
+  warrior.LVL,
+  definePercentages(warrior.expNextLevel, warrior.EXP)
+);
 
 // <-------------------------Attacks-------------------------> //
 
 //ATTACK MOB
-swordAttack.addEventListener("click", function () {
+let canAttack = true;
+swordAttack.onclick = function () {
+  //Receive Damage
   Javali.HP = Javali.HP - damageDealt(warrior.maxAtk, warrior.minAtk);
   console.log(Javali.HP);
-  //
-  updateProgressBar(pBar01, Javali.HP, definePercentages(Javali.maxHP, Javali.HP));
-  console.log(definePercentages(Javali.maxHP, Javali.HP));
-});
+  //Check if mob is still alive
+  if (Javali.HP > 0) {
+    //
+    updateProgressBar(
+      mobBar,
+      Javali.HP,
+      definePercentages(Javali.maxHP, Javali.HP)
+    );
+    console.log(definePercentages(Javali.maxHP, Javali.HP));
+  } else {
+    //Corrigir nao pode bater depois que morrer
+    //Give player EXP
+    warrior.EXP += Javali.EXP;
+    updateExpBar(expBar);
+    Javali.HP = Infinity;
+    // Javali.HP = 0;
+    // updateProgressBar(
+    //   mobBar,
+    //   Javali.HP,
+    //   definePercentages(Javali.maxHP, Javali.HP)
+    // );
+    console.log(definePercentages(Javali.maxHP, Javali.HP));
+    monsterSprite.classList.add("fade-out");
+    setTimeout(() => {
+      monsterSprite.classList.remove("fade-out");
+      respawn(Javali);
+    }, 500);
+  }
+};
 //ATTACK PLAYER
-
-
-
-
 
 //TEST SECTION
 ///////////
@@ -240,3 +351,5 @@ swordAttack.addEventListener("click", function () {
 //    }, 70);
 //  }
 
+// ENEMY STATS AFFECTED BY MAP LVL
+//

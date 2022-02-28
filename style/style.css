@@ -115,7 +115,7 @@ footer {
 #hero {
   height: 100px;
   margin-top: 25px;
-  margin-left: 4rem;
+  margin-left: 37%;
   /* border: 2px solid #dd5a65;
   padding: 10px; */
 }
@@ -158,7 +158,7 @@ footer {
 }
 
 .hero-stats:hover::before {
-  transform: skewX(45deg) translateX(-150px);
+  transform: skewX(45deg) translateX(-200px);
   opacity: 100%;
 }
 
@@ -229,7 +229,20 @@ td:active {
   opacity: 100%;
 }
 
-#sword {
+#sword:hover {
+  filter: drop-shadow(1px 2px 7px rgb(59, 235, 59));
+}
+
+#HP-Potion:hover {
+  filter: drop-shadow(1px 2px 7px rgb(235, 59, 112));
+}
+
+#SP-Potion:hover {
+  filter: drop-shadow(1px 1px 6px rgb(32, 99, 241));
+}
+
+#coins:hover {
+  filter: drop-shadow(1px 2px 7px rgb(235, 223, 59));
 }
 
 .qtd {
@@ -272,6 +285,8 @@ td:active {
   transform: translate(5%, -5%);
 }
 
+/* HP BAR for MOB AND PLAYER */
+
 .progress__mob {
   position: relative;
   width: 210px;
@@ -291,7 +306,7 @@ td:active {
   background-color: rgb(255, 255, 255);
   border-radius: 15px;
   margin-top: 20px;
-  margin-left: 50px;
+  margin-left: 35%;
 }
 
 .progress__fill,
@@ -301,7 +316,8 @@ td:active {
   border-radius: 15px;
   background-color: #dd5a65;
   transition: all 0.2s;
-  box-shadow: inset 1px 1px 7.5px 1.5px black, inset -1px -1px 0.5px 1.5px black;
+  box-shadow: inset 1px 1px 7.5px 1.5px rgb(185, 35, 35),
+    inset -1px -1px 0.5px 1.5px black;
 }
 
 .progress__text {
@@ -322,6 +338,70 @@ td:active {
   color: rgb(224, 214, 165);
   text-shadow: 2px 2px 1px black;
   font-size: 12px;
+}
+
+/* EXP BAR FOR PLAYER */
+.exp {
+  margin-top: 4px;
+  position: relative;
+  background-color: white;
+  width: 100px;
+  height: 10px;
+  text-align: center;
+  text-justify: auto;
+  margin-bottom: 10px;
+  margin-left: 36%;
+  border: solid 1px green;
+}
+
+.exp-fill {
+  width: 75%;
+  height: 100%;
+  transition: all 0.2s;
+  background-color: #5add8c;
+}
+
+.exp-text {
+  position: absolute;
+  font-size: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 33%;
+}
+
+.hero-level {
+  position: absolute;
+  color: white;
+  background-color: #c93d3d;
+  border: 1px solid black;
+  font-size: 10px;
+  width: 100%;
+  height: 20px;
+  text-align: center;
+  top: 0px;
+}
+
+.hero-level-text {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translateY(-50%);
+  text-align: center;
+}
+
+.hero-section {
+  position: relative;
+  border: 1px solid black;
+  background: linear-gradient(
+    135deg,
+    rgba(218, 218, 218, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  box-shadow: inset 1px 1px 5px 1px rgb(230, 230, 230), 1px 2px 8px 2px black;
+  min-width: 75%;
+  left: 0.4rem;
 }
 
 main {
@@ -406,3 +486,60 @@ main {
   }
 }
 
+.three {
+  flex: 1;
+}
+
+/* Animation for fight */
+.fade-out {
+  animation: fadeout 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 0%;
+  }
+}
+
+.stat {
+  color: rgb(248, 185, 66);
+}
+
+.attribute {
+  color: rgb(50, 165, 241);
+}
+
+#STR,
+#DEX,
+#AGI,
+#VIT,
+#INT,
+#MAG,
+#HP,
+#SP,
+#ATK,
+#DEF,
+#ACC,
+#SPD {
+}
+
+.attribute-box {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  bottom: 10px;
+  left: 24%;
+  text-align: center;
+}
+
+.attribute-box-text {
+  color: #70dd5a;
+  font-size: 8px;
+}
+
+#attribute-points {
+  color: #70dd5a;
+}
