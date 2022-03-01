@@ -30,13 +30,26 @@ const arrowDEX = document.querySelector(".arrow-DEX");
 const arrowAGI = document.querySelector(".arrow-AGI");
 const arrowVIT = document.querySelector(".arrow-VIT");
 const arrowINT = document.querySelector(".arrow-INT");
+const allArrows = [arrowSTR, arrowDEX, arrowAGI, arrowVIT, arrowINT];
 
-// Functions
+// <--------------------------Functions-------------------------->
+
+//Show all Arrows for lvling up stats in Stats Section
+const toggleArrows = () => {
+  if (warrior.atributePoints > 0) {
+    for (let element in allArrows) {
+      allArrows[element].classList.remove("hidden");
+    }
+  } else {
+    for (let element in allArrows) {
+      allArrows[element].classList.add("hidden");
+    }
+  }
+};
+
 // Respawn monster
 const respawn = (monster) => {
-  //Recharge HP
   monster.HP = monster.maxHP;
-  //Update HP Bar number and fill stats
   updateMobHpBar(
     mobBar,
     monster.maxHP,
@@ -44,9 +57,118 @@ const respawn = (monster) => {
   );
 };
 
-let isDead = false;
-// Calc exp to next Lvl and put it on screen
-const calcExp = () => {};
+// Attributes Function
+// Showing hero Stats in HTML (.hero-stats class)
+function updateStats() {
+  //Stats Initialization
+  statSTR.textContent = warrior.STR;
+  statDEX.textContent = warrior.DEX;
+  statAGI.textContent = warrior.AGI;
+  statVIT.textContent = warrior.VIT;
+  statINT.textContent = warrior.INT;
+
+  //Atribute initialization
+  statHP.textContent = `${warrior.HP}/${warrior.maxHP}`;
+  statSP.textContent = `${warrior.SP}/${warrior.maxSP}`;
+  statATK.textContent = `${warrior.minAtk} - ${warrior.maxAtk}`;
+  statMAG.textContent = warrior.MAG;
+  statDEF.textContent = warrior.DEF;
+  statACC.textContent = warrior.ACC;
+  statSPD.textContent = warrior.SPD;
+}
+
+//Do the math for Attributes based on Hero Stats Points.
+function updateAttributes(heroe) {
+  heroe.minAtk = Math.round(heroe.STR * 0.3);
+  heroe.maxAtk = Math.round(heroe.STR * 1.1);
+  heroe.maxHP = Math.round(heroe.STR * 1.2) + heroe.VIT * 5 + 50;
+  heroe.ACC = heroe.DEX * 5;
+  heroe.DEF = heroe.DEX * 2 + heroe.VIT * 2;
+  heroe.MAG = heroe.INT * 4;
+  heroe.SPD = heroe.AGI * 3;
+  heroe.maxSP = heroe.INT * 5;
+  //Write it on HTML
+  updateStats();
+}
+
+// Health Bar
+
+//Definir dano recebido
+function damageDealt(atk, minAtk) {
+  return Math.trunc(Math.random() * atk) + minAtk;
+}
+
+//Define a porcentagem maxima do HP depois do dano
+function definePercentages(higherValue, lowerValue = higherValue) {
+  return `${(lowerValue * 100) / higherValue}%`;
+}
+
+//Muda os valores na barra de acordo com a porcentagem e o dano
+function updateMobHpBar(pbar, hp, percentage) {
+  pbar.querySelector(".progress__fill").style.width = percentage;
+  pbar.querySelector(".progress__text").textContent = hp;
+}
+function updatePlayerHpBar(pbar, hp, maxHp, percentage) {
+  pbar.querySelector(".progress__fill__player").style.width = percentage;
+  pbar.querySelector(".progress__text__player").textContent = `${hp}/${maxHp}`;
+}
+
+// -------------------------Upgrade Stats------------------------- //
+
+function upgradeStats(stat) {
+  document.getElementById(stat);
+  warrior[stat]++;
+  warrior.atributePoints--;
+  atributePoints.textContent = warrior.atributePoints;
+  updateAttributes(warrior);
+  updatePlayerHpBar(
+    playerBar,
+    warrior.HP,
+    warrior.maxHP,
+    definePercentages(warrior.maxHP, warrior.HP)
+  );
+}
+
+//Buton STR
+arrowSTR.addEventListener("click", function () {
+  if (warrior.atributePoints > 0) {
+    upgradeStats("STR");
+  }
+  toggleArrows();
+});
+
+//Button DEX
+arrowDEX.addEventListener("click", function () {
+  if (warrior.atributePoints > 0) {
+    upgradeStats("DEX");
+  }
+  toggleArrows();
+});
+
+//Button AGI
+arrowAGI.addEventListener("click", function () {
+  if (warrior.atributePoints > 0) {
+    upgradeStats("AGI");
+  }
+  toggleArrows();
+});
+
+//Button VIT
+arrowVIT.addEventListener("click", function () {
+  if (warrior.atributePoints > 0) {
+    upgradeStats("VIT");
+  }
+  toggleArrows();
+});
+
+//Button INT
+arrowINT.addEventListener("click", function () {
+  if (warrior.atributePoints > 0) {
+    upgradeStats("INT");
+  }
+  toggleArrows();
+});
+
 // -------------------------Define Objects------------------------- //
 function heroes(
   nameHero,
@@ -107,104 +229,12 @@ const warrior = new heroes(
   1
 );
 
-console.log(warrior);
-// -------------------------Atribute------------------------- //
-
-// function selectAtribute(atribute) {
-//   return document.getElementById(atribute);
-// }
-
-// Showing hero Stats in HTML (.hero-stats class)
-function writeStats() {
-  //Stats Initialization
-  statSTR.textContent = warrior.STR;
-  statDEX.textContent = warrior.DEX;
-  statAGI.textContent = warrior.AGI;
-  statVIT.textContent = warrior.VIT;
-  statINT.textContent = warrior.INT;
-
-  //Atribute initialization
-  statHP.textContent = `${warrior.HP}/${warrior.maxHP}`;
-  statSP.textContent = `${warrior.SP}/${warrior.maxSP}`;
-  statATK.textContent = `${warrior.minAtk} - ${warrior.maxAtk}`;
-  statMAG.textContent = warrior.MAG;
-  statDEF.textContent = warrior.DEF;
-  statACC.textContent = warrior.ACC;
-  statSPD.textContent = warrior.SPD;
-}
-
-//Do the math for Attributes based on Hero Stats Points.
-function defineAtributes(heroe) {
-  heroe.minAtk = Math.round(heroe.STR * 0.3);
-  heroe.maxAtk = Math.round(heroe.STR * 1.1);
-  heroe.maxHP = Math.round(heroe.STR * 1.2) + heroe.VIT * 5 + 50;
-  heroe.ACC = heroe.DEX * 5;
-  heroe.DEF = heroe.DEX * 2 + heroe.VIT * 2;
-  heroe.MAG = heroe.INT * 4;
-  heroe.SPD = heroe.AGI * 3;
-  heroe.maxSP = heroe.INT * 5;
-  writeStats();
-}
-
 //Initializing Stats
-// CORRIGIR
-defineAtributes(warrior);
+//*
+updateAttributes(warrior);
 warrior.HP = warrior.maxHP;
 warrior.SP = warrior.maxSP;
-defineAtributes(warrior);
-
-// -------------------------Upgrade Stats------------------------- //
-
-function upgradeStats(stat) {
-  document.getElementById(stat);
-  warrior[stat]++;
-  warrior.atributePoints--;
-  atributePoints.textContent = warrior.atributePoints;
-  defineAtributes(warrior);
-  updateProgressBarPlayer(
-    playerBar,
-    warrior.HP,
-    warrior.maxHP,
-    definePercentages(warrior.maxHP, warrior.HP)
-  );
-}
-
-//Buton STR
-arrowSTR.addEventListener("click", function () {
-  if (warrior.atributePoints > 0) {
-    upgradeStats("STR");
-  }
-});
-
-//Button DEX
-arrowDEX.addEventListener("click", function () {
-  if (warrior.atributePoints > 0) {
-    upgradeStats("DEX");
-  }
-});
-
-//Button AGI
-arrowAGI.addEventListener("click", function () {
-  if (warrior.atributePoints > 0) {
-    upgradeStats("AGI");
-  }
-});
-
-//Button VIT
-arrowVIT.addEventListener("click", function () {
-  if (warrior.atributePoints > 0) {
-    upgradeStats("VIT");
-  }
-});
-
-//Button INT
-arrowINT.addEventListener("click", function () {
-  if (warrior.atributePoints > 0) {
-    upgradeStats("INT");
-  }
-});
-
-// -------------------------LVL Sistem------------------------- //
+updateAttributes(warrior);
 
 // -------------------------Mobs------------------------- //
 function Monster(EXP, maxHP, HP = maxHP) {
@@ -215,38 +245,16 @@ function Monster(EXP, maxHP, HP = maxHP) {
 const Javali = new Monster(5, 20);
 console.log(Javali.HP);
 
-// -------------------------Health Bar------------------------- //
-
-//Definir dano recebido
-function damageDealt(atk, minAtk) {
-  return Math.trunc(Math.random() * atk) + minAtk;
-}
-
-//Define a porcentagem maxima do HP depois do dano
-function definePercentages(higherValue, lowerValue = higherValue) {
-  return `${(lowerValue * 100) / higherValue}%`;
-}
-
-//Muda os valores na barra de acordo com a porcentagem e o dano
-function updateMobHpBar(pbar, hp, percentage) {
-  pbar.querySelector(".progress__fill").style.width = percentage;
-  pbar.querySelector(".progress__text").textContent = hp;
-}
-function updateProgressBarPlayer(pbar, hp, maxHp, percentage) {
-  pbar.querySelector(".progress__fill__player").style.width = percentage;
-  pbar.querySelector(".progress__text__player").textContent = `${hp}/${maxHp}`;
-}
 // ------------------------- EXP BAR -------------------------- //
 //Update Level and Exp Bar
-
-warrior.atributePoints = (warrior.LVL - 1) * 5;
+//warrior.atributePoints = (warrior.LVL - 1) * 3;
 
 function updateExpBar(bar) {
   if (warrior.EXP >= warrior.expNextLevel) {
     warrior.LVL += 1;
-    warrior.atributePoints += 5;
+    warrior.atributePoints += 3;
     atributePoints.textContent = warrior.atributePoints;
-    warrior.EXP = warrior.EXP - warrior.expNextLevel; // Corrigir
+    warrior.EXP -= warrior.expNextLevel;
     warrior.expNextLevel = Math.trunc(warrior.expNextLevel * 1.6);
     bar.querySelector(".exp-fill").style.width = definePercentages(
       warrior.expNextLevel,
@@ -265,14 +273,17 @@ function updateExpBar(bar) {
       ".exp-text"
     ).textContent = `${warrior.EXP}/${warrior.expNextLevel}`;
   }
+  toggleArrows();
 }
-////////////////////////
+
+// -------------------------LVL Sistem------------------------- //
+
 //PERCENT MOB
 updateMobHpBar(mobBar, Javali.HP, definePercentages(Javali.maxHP, Javali.HP));
 console.log(definePercentages(Javali.maxHP, Javali.HP));
 
 //PERCENT PLAYER
-updateProgressBarPlayer(
+updatePlayerHpBar(
   playerBar,
   warrior.HP,
   warrior.maxHP,
@@ -288,8 +299,6 @@ updateExpBar(
 );
 
 // <-------------------------Attacks-------------------------> //
-
-isDead = false;
 //ATTACK MOB
 document.querySelector(".sword-attack").addEventListener("click", function () {
   //Receive Damage
@@ -325,7 +334,7 @@ document.querySelector(".sword-attack").addEventListener("click", function () {
 
 //ATTACK PLAYER
 
-//TEST SECTION
+// <-------------------------TEST AREA-------------------------> //
 ///////////
 
 //

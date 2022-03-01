@@ -417,9 +417,9 @@ main {
 
 /* Testes */
 
-/* .hidden {
+.hidden {
   display: none;
-} */
+}
 
 /* MEDIA */
 @media (min-width: 2100px) {
