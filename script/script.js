@@ -1,4 +1,25 @@
 "use strict";
+// Canvas Variables
+// const canvas = document.querySelector("canvas");
+// const c = canvas.getContext("2d");
+
+// canvas.width = innerWidth;
+// canvas.height = innerHeight;
+// let x = 1;
+// let y = 2;
+
+// function animate() {
+//   requestAnimationFrame(animate);
+//   c.clearRect(0, 0, innerWidth, innerHeight);
+//   c.beginPath();
+//   c.arc(x, y, 30, 0, Math.PI * 2, false);
+//   c.fillStyle = "blue";
+//   c.fill();
+//   x++;
+//   y++;
+// }
+// animate();
+
 // Define Variables
 const mobBar = document.querySelector(".progress__mob");
 const playerBar = document.querySelector(".progress__player");
@@ -30,19 +51,30 @@ const arrowDEX = document.querySelector(".arrow-DEX");
 const arrowAGI = document.querySelector(".arrow-AGI");
 const arrowVIT = document.querySelector(".arrow-VIT");
 const arrowINT = document.querySelector(".arrow-INT");
-const allArrows = [arrowSTR, arrowDEX, arrowAGI, arrowVIT, arrowINT];
 
+function arrowsObj(classSelector, statRefer) {
+  this.classSelector = classSelector;
+  this.statRefer = statRefer;
+}
+
+const objSTR = new arrowsObj(document.querySelector(".arrow-STR"), "STR"); // seguir esse modelo
+const objDEX = new arrowsObj(arrowDEX, "DEX");
+const objAGI = new arrowsObj(arrowAGI, "AGI");
+const objVIT = new arrowsObj(arrowVIT, "VIT");
+const objINT = new arrowsObj(arrowINT, "INT");
+
+const allObjArrows = [objSTR, objDEX, objAGI, objVIT, objINT];
 // <--------------------------Functions-------------------------->
 
 //Show all Arrows for lvling up stats in Stats Section
 const toggleArrows = () => {
   if (warrior.atributePoints > 0) {
-    for (let element in allArrows) {
-      allArrows[element].classList.remove("hidden");
+    for (let element in allObjArrows) {
+      allObjArrows[element].classSelector.classList.remove("hidden");
     }
   } else {
-    for (let element in allArrows) {
-      allArrows[element].classList.add("hidden");
+    for (let element in allObjArrows) {
+      allObjArrows[element].classSelector.classList.add("hidden");
     }
   }
 };
@@ -129,64 +161,34 @@ function upgradeStats(stat) {
   );
 }
 
-//Buton STR
-arrowSTR.addEventListener("click", function () {
-  if (warrior.atributePoints > 0) {
-    upgradeStats("STR");
-  }
-  toggleArrows();
-});
-
-//Button DEX
-arrowDEX.addEventListener("click", function () {
-  if (warrior.atributePoints > 0) {
-    upgradeStats("DEX");
-  }
-  toggleArrows();
-});
-
-//Button AGI
-arrowAGI.addEventListener("click", function () {
-  if (warrior.atributePoints > 0) {
-    upgradeStats("AGI");
-  }
-  toggleArrows();
-});
-
-//Button VIT
-arrowVIT.addEventListener("click", function () {
-  if (warrior.atributePoints > 0) {
-    upgradeStats("VIT");
-  }
-  toggleArrows();
-});
-
-//Button INT
-arrowINT.addEventListener("click", function () {
-  if (warrior.atributePoints > 0) {
-    upgradeStats("INT");
-  }
-  toggleArrows();
+//For each button in stats lvl up
+allObjArrows.forEach((arrows) => {
+  arrows.classSelector.addEventListener("click", () => {
+    if (warrior.atributePoints > 0) {
+      upgradeStats(arrows.statRefer);
+    }
+    toggleArrows();
+  });
 });
 
 // -------------------------Define Objects------------------------- //
-function heroes(
-  nameHero,
-  classHero,
-  maxHP,
-  HP,
-  maxSP,
-  SP,
-  STR,
-  DEX,
-  AGI,
-  VIT,
-  INT,
-  atributePoints,
-  EXP,
-  expNextLevel,
-  LVL
-) {
+function Heroes({
+  nameHero = undefined,
+  classHero = undefined,
+  maxHP = 50,
+  HP = 50,
+  maxSP = 0,
+  SP = 0,
+  STR = 3,
+  DEX = 2,
+  AGI = 1,
+  VIT = 2,
+  INT = 1,
+  atributePoints = 0,
+  EXP = 0,
+  expNextLevel = 20,
+  LVL = 1,
+}) {
   this.nameHero = nameHero;
   this.classHero = classHero;
   this.maxHP = maxHP;
@@ -211,23 +213,11 @@ function heroes(
 }
 
 //Creating a warrior
-const warrior = new heroes(
-  "Heroe",
-  "Warrior",
-  50,
-  50,
-  0,
-  0,
-  3,
-  2,
-  1,
-  2,
-  1,
-  0,
-  0,
-  20,
-  1
-);
+const warrior = new Heroes({
+  nameHero: "Heroe",
+  classHero: "Warrior",
+});
+console.log(warrior);
 
 //Initializing Stats
 //*
@@ -358,3 +348,5 @@ document.querySelector(".sword-attack").addEventListener("click", function () {
 
 // ENEMY STATS AFFECTED BY MAP LVL
 //
+
+let imgSword = new Image();
