@@ -2,8 +2,6 @@
 
 KWOWN BUGS:
 
-HP Bar and Text when mob dies not showing proper value.
-
 ###### Hero Stats
 
 There are two types of stats, Attributes and Stats
