@@ -184,8 +184,6 @@ td:active {
 #td-sword {
 }
 
-.stat-name {
-}
 
 .icons {
   position: absolute;
@@ -505,26 +503,9 @@ main {
   }
 }
 
-.stat {
-  color: rgb(248, 185, 66);
-}
 
 .attribute {
   color: rgb(50, 165, 241);
-}
-
-#STR,
-#DEX,
-#AGI,
-#VIT,
-#INT,
-#MAG,
-#HP,
-#SP,
-#ATK,
-#DEF,
-#ACC,
-#SPD {
 }
 
 .attribute-box {
